@@ -25,6 +25,20 @@ class ProcessaAcelerometro():
         self.intensidades = ['Leve', 'Moderada', 'Vigorosa']
         self.dias_da_semana = ['Segunda-feira', 'Terça-feira','Quarta-feira', 'Quinta-feira','Sexta-feira', 'Sábado','Domingo']
         self.leve_sem1 = None
+        self.leve_sem2 = None
+        self.leve_sem2 = None
+        self.leve_sem2 = None
+        self.leve_sem2 = None
+        self.moderada_sem1 = None
+        self.moderada_sem2 = None
+        self.moderada_sem3 = None
+        self.moderada_sem4 = None
+        self.moderada_sem5 = None
+        self.vigorosa_sem1 = None
+        self.vigorosa_sem2 = None
+        self.vigorosa_sem3 = None
+        self.vigorosa_sem4 = None
+        self.vigorosa_sem5 = None
         
         
         self.FiltrarUsuario()
@@ -41,7 +55,7 @@ class ProcessaAcelerometro():
         print('...')
         self.ProcessarDadosSemanas()
         print('Dados processados com sucesso!')
-        #self.CriarGraficos() # Revise essa função
+        self.CriarGraficos() 
         
     def FiltrarUsuario(self):
         self.data = self.dados.loc[self.dados['IDPerfil'] == self.usuario_num]
@@ -115,6 +129,7 @@ class ProcessaAcelerometro():
         #AF moderada
         moderada_sem1 = self.sem1['Moderate'].values.tolist()
         moderada_sem1 = [int(h.split(":")[0]) + int(h.split(":")[1]) / 100 for h in moderada_sem1]
+        self.moderada_sem1 = moderada_sem1
 
         # Converter os valores para o formato datetime para poder converter as horas em minutos
         self.sem1['Moderate'] = self.sem1['Moderate'].apply(lambda x: datetime.strptime(x, "%H:%M:%S").time())
@@ -132,6 +147,7 @@ class ProcessaAcelerometro():
         strong_sem1 = [int(h.split(":")[0]) + int(h.split(":")[1]) / 100 for h in strong_sem1]
         vigorosa_sem1 = [int(h.split(":")[0]) + int(h.split(":")[1]) / 100 for h in vigorosa_sem1]
         vigorosa_sem1 = [vigorosa_sem1 + strong_sem1 for vigorosa_sem1, strong_sem1 in zip(vigorosa_sem1, strong_sem1)]
+        self.vigorosa_sem1 = vigorosa_sem1
 
 
         # Converter os valores para o formato datetime para poder converter as horas em minutos
@@ -152,6 +168,7 @@ class ProcessaAcelerometro():
         #AF leve
         leve_sem2 = self.sem2['Ligth'].values.tolist()
         leve_sem2 = [int(h.split(":")[0]) + int(h.split(":")[1]) / 100 for h in leve_sem2]
+        self.leve_sem2 = leve_sem2
 
         # Converter os valores para o formato datetime para poder converter as horas em minutos
         self.sem2['Ligth'] = self.sem2['Ligth'].apply(lambda x: datetime.strptime(x, "%H:%M:%S").time())
@@ -166,6 +183,7 @@ class ProcessaAcelerometro():
         #AF moderada
         moderada_sem2 = self.sem2['Moderate'].values.tolist()
         moderada_sem2 = [int(h.split(":")[0]) + int(h.split(":")[1]) / 100 for h in moderada_sem2]
+        self.moderada_sem2 = moderada_sem2
 
         # Converter os valores para o formato datetime para poder converter as horas em minutos
         self.sem2['Moderate'] = self.sem2['Moderate'].apply(lambda x: datetime.strptime(x, "%H:%M:%S").time())
@@ -183,6 +201,7 @@ class ProcessaAcelerometro():
         strong_sem2 = [int(h.split(":")[0]) + int(h.split(":")[1]) / 100 for h in strong_sem2]
         vigorosa_sem2 = [int(h.split(":")[0]) + int(h.split(":")[1]) / 100 for h in vigorosa_sem2]
         vigorosa_sem2 = [vigorosa_sem2 + strong_sem2 for vigorosa_sem2, strong_sem2 in zip(vigorosa_sem2, strong_sem2)]
+        self.vigorosa_sem2 = vigorosa_sem2
 
 
         # Converter os valores para o formato datetime para poder converter as horas em minutos
@@ -203,6 +222,7 @@ class ProcessaAcelerometro():
         #AF leve
         leve_sem3 = self.sem3['Ligth'].values.tolist()
         leve_sem3 = [int(h.split(":")[0]) + int(h.split(":")[1]) / 100 for h in leve_sem3]
+        self.leve_sem3 = leve_sem3
 
         # Converter os valores para o formato datetime para poder converter as horas em minutos
         self.sem3['Ligth'] = self.sem3['Ligth'].apply(lambda x: datetime.strptime(x, "%H:%M:%S").time())
@@ -217,6 +237,7 @@ class ProcessaAcelerometro():
         #AF moderada
         moderada_sem3 = self.sem3['Moderate'].values.tolist()
         moderada_sem3 = [int(h.split(":")[0]) + int(h.split(":")[1]) / 100 for h in moderada_sem3]
+        self.moderada_sem3 = moderada_sem3
 
         # Converter os valores para o formato datetime para poder converter as horas em minutos
         self.sem3['Moderate'] = self.sem3['Moderate'].apply(lambda x: datetime.strptime(x, "%H:%M:%S").time())
@@ -234,6 +255,7 @@ class ProcessaAcelerometro():
         strong_sem3 = [int(h.split(":")[0]) + int(h.split(":")[1]) / 100 for h in strong_sem3]
         vigorosa_sem3 = [int(h.split(":")[0]) + int(h.split(":")[1]) / 100 for h in vigorosa_sem3]
         vigorosa_sem3 = [vigorosa_sem3 + strong_sem3 for vigorosa_sem3, strong_sem3 in zip(vigorosa_sem3, strong_sem3)]
+        self.vigorosa_sem3 = vigorosa_sem3
 
 
         # Converter os valores para o formato datetime para poder converter as horas em minutos
@@ -253,6 +275,7 @@ class ProcessaAcelerometro():
         #AF leve
         leve_sem4 = self.sem4['Ligth'].values.tolist()
         leve_sem4 = [int(h.split(":")[0]) + int(h.split(":")[1]) / 100 for h in leve_sem4]
+        self.leve_sem4 = leve_sem4
 
 
         # Converter os valores para o formato datetime para poder converter as horas em minutos
@@ -268,6 +291,7 @@ class ProcessaAcelerometro():
         #AF moderada
         moderada_sem4 = self.sem4['Moderate'].values.tolist()
         moderada_sem4 = [int(h.split(":")[0]) + int(h.split(":")[1]) / 100 for h in moderada_sem4]
+        self.moderada_sem4 = moderada_sem4
 
         # Converter os valores para o formato datetime para poder converter as horas em minutos
         self.sem4['Moderate'] = self.sem4['Moderate'].apply(lambda x: datetime.strptime(x, "%H:%M:%S").time())
@@ -284,6 +308,7 @@ class ProcessaAcelerometro():
         strong_sem4 = [int(h.split(":")[0]) + int(h.split(":")[1]) / 100 for h in strong_sem4]
         vigorosa_sem4 = [int(h.split(":")[0]) + int(h.split(":")[1]) / 100 for h in vigorosa_sem4]
         vigorosa_sem4 = [vigorosa_sem4 + strong_sem4 for vigorosa_sem4, strong_sem4 in zip(vigorosa_sem4, strong_sem4)]
+        self.vigorosa_sem4 = vigorosa_sem4
 
 
         # Converter os valores para o formato datetime para poder converter as horas em minutos
@@ -303,6 +328,7 @@ class ProcessaAcelerometro():
         #AF leve
         leve_sem5 = self.sem5['Ligth'].values.tolist()
         leve_sem5 = [int(h.split(":")[0]) + int(h.split(":")[1]) / 100 for h in leve_sem5]
+        self.leve_sem5 = leve_sem5
 
         # Converter os valores para o formato datetime para poder converter as horas em minutos
         self.sem5['Ligth'] = self.sem5['Ligth'].apply(lambda x: datetime.strptime(x, "%H:%M:%S").time())
@@ -316,6 +342,7 @@ class ProcessaAcelerometro():
         #AF moderada
         moderada_sem5 = self.sem5['Moderate'].values.tolist()
         moderada_sem5 = [int(h.split(":")[0]) + int(h.split(":")[1]) / 100 for h in moderada_sem5]
+        self.moderada_sem5 = moderada_sem5
 
         # Converter os valores para o formato datetime para poder converter as horas em minutos
         self.sem5['Moderate'] = self.sem5['Moderate'].apply(lambda x: datetime.strptime(x, "%H:%M:%S").time())
@@ -332,6 +359,7 @@ class ProcessaAcelerometro():
         strong_sem5 = [int(h.split(":")[0]) + int(h.split(":")[1]) / 100 for h in strong_sem5]
         vigorosa_sem5 = [int(h.split(":")[0]) + int(h.split(":")[1]) / 100 for h in vigorosa_sem5]
         vigorosa_sem5 = [vigorosa_sem5 + strong_sem5 for vigorosa_sem5, strong_sem5 in zip(vigorosa_sem5, strong_sem5)]
+        self.vigorosa_sem5 = vigorosa_sem5
 
         # Converter os valores para o formato datetime para poder converter as horas em minutos
         self.sem5['Vigorous'] = self.sem5['Vigorous'].apply(lambda x: datetime.strptime(x, "%H:%M:%S").time())
@@ -351,36 +379,36 @@ class ProcessaAcelerometro():
         fig, ax = plt.subplots(nrows = 5, ncols = 1, figsize=(6,18), sharey=True)
 
         ax[0].plot(self.dias_da_semana, self.leve_sem1, color = '#228B22', linestyle='--', marker = 'o', markersize = 4, label = 'Leve')
-        ax[0].plot(self.dias_da_semana, self.ProcessarDadosSemanas().moderada_sem1, color = '#FF8C00', linestyle='--', marker = 'o', markersize = 4, label = 'Moderada')
-        ax[0].plot(self.dias_da_semana, self.ProcessarDadosSemanas().vigorosa_sem1, color = '#FF0000',linestyle='--', marker = 'o', markersize = 4, label = 'Vigorosa')
+        ax[0].plot(self.dias_da_semana, self.moderada_sem1, color = '#FF8C00', linestyle='--', marker = 'o', markersize = 4, label = 'Moderada')
+        ax[0].plot(self.dias_da_semana, self.vigorosa_sem1, color = '#FF0000',linestyle='--', marker = 'o', markersize = 4, label = 'Vigorosa')
         ax[0].set_title('Semana 1 ' + str(self.sem1['Date'].iloc[0]) + ' à' + str(self.sem1['Date'].iloc[-1]), fontsize=12) # MUDAR A DATA AQUI
         ax[0].set_ylabel('Tempo (horas)')
 
 
-        ax[1].plot(self.dias_da_semana, self.ProcessarDadosSemanas().leve_sem2, color = '#228B22',linestyle='--', marker = 'o', markersize = 4)
-        ax[1].plot(self.dias_da_semana, self.ProcessarDadosSemanas().moderada_sem2, color = '#FF8C00', linestyle='--', marker = 'o', markersize = 4)
-        ax[1].plot(self.dias_da_semana, self.ProcessarDadosSemanas().vigorosa_sem2, color = '#FF0000', linestyle='--', marker = 'o', markersize = 4)
+        ax[1].plot(self.dias_da_semana, self.leve_sem2, color = '#228B22',linestyle='--', marker = 'o', markersize = 4)
+        ax[1].plot(self.dias_da_semana, self.moderada_sem2, color = '#FF8C00', linestyle='--', marker = 'o', markersize = 4)
+        ax[1].plot(self.dias_da_semana, self.vigorosa_sem2, color = '#FF0000', linestyle='--', marker = 'o', markersize = 4)
         ax[1].set_title('Semana 2 ' + str(self.sem2['Date'].iloc[0]) + ' à' + str(self.sem2['Date'].iloc[-1]), fontsize=12)
         ax[1].set_ylabel('Tempo (horas)')
 
 
-        ax[2].plot(self.dias_da_semana, self.ProcessarDadosSemanas().leve_sem3, color = '#228B22', linestyle='--', marker = 'o', markersize = 4)
-        ax[2].plot(self.dias_da_semana, self.ProcessarDadosSemanas().moderada_sem3, color = '#FF8C00', linestyle='--', marker = 'o', markersize = 4)
-        ax[2].plot(self.dias_da_semana, self.ProcessarDadosSemanas().vigorosa_sem3, color = '#FF0000', linestyle='--', marker = 'o', markersize = 4)
+        ax[2].plot(self.dias_da_semana, self.leve_sem3, color = '#228B22', linestyle='--', marker = 'o', markersize = 4)
+        ax[2].plot(self.dias_da_semana, self.moderada_sem3, color = '#FF8C00', linestyle='--', marker = 'o', markersize = 4)
+        ax[2].plot(self.dias_da_semana, self.vigorosa_sem3, color = '#FF0000', linestyle='--', marker = 'o', markersize = 4)
         ax[2].set_title('Semana 3 ' + str(self.sem3['Date'].iloc[0]) + ' à' + str(self.sem3['Date'].iloc[-1]), fontsize=12)
         ax[2].set_ylabel('Tempo (horas)')
 
 
-        ax[3].plot(self.dias_da_semana, self.ProcessarDadosSemanas().leve_sem4, color = '#228B22', linestyle='--', marker = 'o', markersize = 4)
-        ax[3].plot(self.dias_da_semana, self.ProcessarDadosSemanas().moderada_sem4, color = '#FF8C00', linestyle='--', marker = 'o', markersize = 4)
-        ax[3].plot(self.dias_da_semana, self.ProcessarDadosSemanas().vigorosa_sem4, color = '#FF0000', linestyle='--', marker = 'o', markersize = 4)
+        ax[3].plot(self.dias_da_semana, self.leve_sem4, color = '#228B22', linestyle='--', marker = 'o', markersize = 4)
+        ax[3].plot(self.dias_da_semana, self.moderada_sem4, color = '#FF8C00', linestyle='--', marker = 'o', markersize = 4)
+        ax[3].plot(self.dias_da_semana, self.vigorosa_sem4, color = '#FF0000', linestyle='--', marker = 'o', markersize = 4)
         ax[3].set_title('Semana 4 ' + str(self.sem4['Date'].iloc[0]) + ' à' + str(self.sem4['Date'].iloc[-1]), fontsize=12)
         ax[3].set_ylabel('Tempo (horas)')
 
 
-        ax[4].plot(self.dias_da_semana, self.ProcessarDadosSemanas().leve_sem5, color = '#228B22', linestyle='--', marker = 'o', markersize = 4)
-        ax[4].plot(self.dias_da_semana, self.ProcessarDadosSemanas().moderada_sem5, color = '#FF8C00', linestyle='--', marker = 'o', markersize = 4)
-        ax[4].plot(self.dias_da_semana, self.ProcessarDadosSemanas().vigorosa_sem5, color = '#FF0000', linestyle='--', marker = 'o', markersize = 4)
+        ax[4].plot(self.dias_da_semana, self.leve_sem5, color = '#228B22', linestyle='--', marker = 'o', markersize = 4)
+        ax[4].plot(self.dias_da_semana, self.moderada_sem5, color = '#FF8C00', linestyle='--', marker = 'o', markersize = 4)
+        ax[4].plot(self.dias_da_semana, self.vigorosa_sem5, color = '#FF0000', linestyle='--', marker = 'o', markersize = 4)
         ax[4].set_title('Semana 5 ' + str(self.sem5['Date'].iloc[0]) + ' à' + str(self.sem5['Date'].iloc[-1]), fontsize=12)
         ax[4].set_ylabel('Tempo (horas)')
 
