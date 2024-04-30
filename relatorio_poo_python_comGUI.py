@@ -6,14 +6,12 @@ import customtkinter
 
 
 
-
 class ProcessaAcelerometro():
     
     def __init__(self):
         self.dados = None
-        self.usuario = input('Por favor, digite o ID do usuário cujos dados serão processados: ')
-        print('O usuário selecionado foi o: ' + str(self.usuario))
-        self.usuario_num = int(self.usuario)
+        self.usuario = None
+        self.usuario_num = None
         self.data = None
         self.data_inicio = None
         self.data_final = None
@@ -41,25 +39,71 @@ class ProcessaAcelerometro():
         self.vigorosa_sem5 = None
         self.diretorio = None
         
-        self.getfile()
-        self.FiltrarUsuario()
-        self.ConverteEmData()
-        print('Conversão do formato data realizada com sucesso!')
-        self.EspecificarData()
-        self.FiltrarDadosData()
-        print('Agora vamos ordenar o banco de dados!')
-        self.OrdenarBanco()
-        self.SalvarBancoDados() # Crie uma função para perguntar se a pessoa deseja salvar o banco de dados
-        self.DividirBancoEmSemanas()
-        print('...')
-        print('Aguarde os teus dados estão sendo processados...')
-        print('...')
-        self.ProcessarDadosSemanas()
-        print('Dados processados com sucesso!')
-        self.CriarGraficos() 
+        self.TelaInicial()
+        #self.getfile()
+         
         
 
+    def TelaInicial(self):
+        
+        janela_input = customtkinter.CTk()
+        janela_input.geometry("500x500")
 
+        
+        def clique():
+        
+            janela_input.destroy()
+            self.getfile()
+            self.FiltrarUsuario()
+            self.ConverteEmData()
+            print('Conversão do formato data realizada com sucesso!')
+            #self.EspecificarData()
+            self.FiltrarDadosData()
+            print('Agora vamos ordenar o banco de dados!')
+            self.OrdenarBanco()
+            self.SalvarBancoDados() # Crie uma função para perguntar se a pessoa deseja salvar o banco de dados
+            self.DividirBancoEmSemanas()
+            print('...')
+            print('Aguarde os teus dados estão sendo processados...')
+            print('...')
+            self.ProcessarDadosSemanas()
+            print('Dados processados com sucesso!')
+            self.CriarGraficos()
+            
+
+        
+        texto_id = customtkinter.CTkLabel(janela_input, text='Insira o ID do usuário abaixo')
+        texto_id.pack(padx=10, pady=10)
+        ID = customtkinter.CTkEntry(janela_input, placeholder_text='ex: 738')
+        ID.pack(padx=10, pady=10)
+        
+        texto_data_inicio = customtkinter.CTkLabel(janela_input, text='Insira a data de início do monitoramento. exemplo: 2023-08-07')
+        texto_data_inicio.pack(padx=10, pady=10)
+        data_inicio_monitoramento = customtkinter.CTkEntry(janela_input, placeholder_text='Insira a data de início do monitoramento')
+        
+        data_inicio_monitoramento.pack(padx=10, pady=10)
+        
+        texto_data_fim = customtkinter.CTkLabel(janela_input, text='Insira a data de fim do monitoramento. exemplo: 2023-09-10')
+        texto_data_fim.pack(padx=10, pady=10)
+        data_fim_monitoramento = customtkinter.CTkEntry(janela_input, placeholder_text='Insira a data de fim do monitoramento')
+        data_fim_monitoramento.pack(padx=10, pady=10)
+
+        botao = customtkinter.CTkButton(janela_input, text='Continuar', command=clique)
+        botao.pack(padx=10, pady=10)
+        
+        
+        indent = ID.get()
+        self.usuario = int(indent)
+        self.data_inicio = data_inicio_monitoramento.get()
+        self.data_final = data_fim_monitoramento.get()
+
+        janela_input.mainloop()
+
+
+    #def clique(self):
+    
+        #self.getfile()
+        
 
 
     def getfile(self):
