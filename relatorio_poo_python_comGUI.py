@@ -40,9 +40,8 @@ class ProcessaAcelerometro():
         self.diretorio = None
         
         self.TelaInicial()
-        #self.getfile()
-         
         
+         
 
     def TelaInicial(self):
         
@@ -52,12 +51,15 @@ class ProcessaAcelerometro():
         
         def clique():
         
+            self.usuario = ID.get()
+            self.data_inicio = data_inicio_monitoramento.get()
+            self.data_final = data_fim_monitoramento.get()
+            self.usuario_num = int(self.usuario)
             janela_input.destroy()
             self.getfile()
             self.FiltrarUsuario()
             self.ConverteEmData()
             print('Conversão do formato data realizada com sucesso!')
-            #self.EspecificarData()
             self.FiltrarDadosData()
             print('Agora vamos ordenar o banco de dados!')
             self.OrdenarBanco()
@@ -70,13 +72,13 @@ class ProcessaAcelerometro():
             print('Dados processados com sucesso!')
             self.CriarGraficos()
             
+            janela_input.quit()
 
         
         texto_id = customtkinter.CTkLabel(janela_input, text='Insira o ID do usuário abaixo')
         texto_id.pack(padx=10, pady=10)
         ID = customtkinter.CTkEntry(janela_input, placeholder_text='ex: 738')
         ID.pack(padx=10, pady=10)
-        
         texto_data_inicio = customtkinter.CTkLabel(janela_input, text='Insira a data de início do monitoramento. exemplo: 2023-08-07')
         texto_data_inicio.pack(padx=10, pady=10)
         data_inicio_monitoramento = customtkinter.CTkEntry(janela_input, placeholder_text='Insira a data de início do monitoramento')
@@ -91,18 +93,9 @@ class ProcessaAcelerometro():
         botao = customtkinter.CTkButton(janela_input, text='Continuar', command=clique)
         botao.pack(padx=10, pady=10)
         
-        
-        indent = ID.get()
-        self.usuario = int(indent)
-        self.data_inicio = data_inicio_monitoramento.get()
-        self.data_final = data_fim_monitoramento.get()
 
         janela_input.mainloop()
 
-
-    #def clique(self):
-    
-        #self.getfile()
         
 
 
@@ -127,10 +120,6 @@ class ProcessaAcelerometro():
     def ConverterEmString(self):
         self.data['Date'] = self.data['Date'].dt.strftime('%d-%m-%Y')
         
-
-    def EspecificarData(self):
-        self.data_inicio = pd.to_datetime(input('Qual foi a data de início do monitoramento, em ano-mes-dia, exemplo: 2023-08-07: '))
-        self.data_final = pd.to_datetime(input('Qual foi a data de término do monitoramento, em ano-mes-dia, exemplo: 2023-09-10: '))
 
 
     def FiltrarDadosData(self):
@@ -439,7 +428,7 @@ class ProcessaAcelerometro():
         ax[0].plot(self.dias_da_semana, self.leve_sem1, color = '#228B22', linestyle='--', marker = 'o', markersize = 4, label = 'Leve')
         ax[0].plot(self.dias_da_semana, self.moderada_sem1, color = '#FF8C00', linestyle='--', marker = 'o', markersize = 4, label = 'Moderada')
         ax[0].plot(self.dias_da_semana, self.vigorosa_sem1, color = '#FF0000',linestyle='--', marker = 'o', markersize = 4, label = 'Vigorosa')
-        ax[0].set_title('Semana 1 ' + str(self.sem1['Date'].iloc[0]) + ' à' + str(self.sem1['Date'].iloc[-1]), fontsize=12) # MUDAR A DATA AQUI
+        ax[0].set_title('Semana 1 ' + str(self.sem1['Date'].iloc[0]) + ' à' + str(self.sem1['Date'].iloc[-1]), fontsize=12)
         ax[0].set_ylabel('Tempo (horas)')
 
 
@@ -479,7 +468,8 @@ class ProcessaAcelerometro():
         fig.autofmt_xdate(rotation=45)
         fig.legend(loc='upper right', bbox_to_anchor=(1.18, 0.975))
         fig.savefig(self.diretorio+'af_ao_longo_dos_dias_durante_as_semanas_fleem.jpg', bbox_inches='tight', dpi=300)
-        plt.show()
+        plt.close(fig)
+        
 
 
 dados_acc_processados = ProcessaAcelerometro()
