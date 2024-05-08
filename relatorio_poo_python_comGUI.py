@@ -5,7 +5,6 @@ import tkinter as Tkinter, tkinter.filedialog as tkFileDialog
 import customtkinter
 
 
-
 class ProcessaAcelerometro():
     
     def __init__(self):
@@ -75,9 +74,12 @@ class ProcessaAcelerometro():
     def TelaInicial(self):
         
         janela_input = customtkinter.CTk()
-        janela_input.geometry("500x500")
-
+        janela_input.geometry("700x400")
+        janela_input.resizable(False, False)
         
+        
+        
+
         def clique():
         
             self.usuario = ID.get()
@@ -108,22 +110,34 @@ class ProcessaAcelerometro():
             janela_input.quit()
 
         
-        texto_id = customtkinter.CTkLabel(janela_input, text='Insira o ID do usuário abaixo')
+        
+        frame = customtkinter.CTkFrame(master=janela_input, width=350, height=400)
+        frame.pack(side=Tkinter.RIGHT)
+
+
+
+        # Parei aqui, precisamos dar um jeito de fazer a imagem aparecer
+        img = Tkinter.PhotoImage(file="img_relatorio.png")
+        label_img = customtkinter.CTkLabel(master=janela_input, image=img)
+        label_img.place(x=5, y=65)
+        
+
+        texto_id = customtkinter.CTkLabel(frame, text='Insira o ID do usuário abaixo')
         texto_id.pack(padx=10, pady=10)
-        ID = customtkinter.CTkEntry(janela_input, placeholder_text='ex: 738')
+        ID = customtkinter.CTkEntry(frame, placeholder_text='ex: 738')
         ID.pack(padx=10, pady=10)
-        texto_data_inicio = customtkinter.CTkLabel(janela_input, text='Insira a data de início do monitoramento. exemplo: 2023-08-07')
+        texto_data_inicio = customtkinter.CTkLabel(frame, text='Insira a data de início do monitoramento. exemplo: 2023-08-07')
         texto_data_inicio.pack(padx=10, pady=10)
-        data_inicio_monitoramento = customtkinter.CTkEntry(janela_input, placeholder_text='Insira a data de início do monitoramento')
+        data_inicio_monitoramento = customtkinter.CTkEntry(frame, placeholder_text='Insira a data de início do monitoramento')
         
         data_inicio_monitoramento.pack(padx=10, pady=10)
         
-        texto_data_fim = customtkinter.CTkLabel(janela_input, text='Insira a data de fim do monitoramento. exemplo: 2023-09-10')
+        texto_data_fim = customtkinter.CTkLabel(frame, text='Insira a data de fim do monitoramento. exemplo: 2023-09-10')
         texto_data_fim.pack(padx=10, pady=10)
-        data_fim_monitoramento = customtkinter.CTkEntry(janela_input, placeholder_text='Insira a data de fim do monitoramento')
+        data_fim_monitoramento = customtkinter.CTkEntry(frame, placeholder_text='Insira a data de fim do monitoramento')
         data_fim_monitoramento.pack(padx=10, pady=10)
 
-        botao = customtkinter.CTkButton(janela_input, text='Continuar', command=clique)
+        botao = customtkinter.CTkButton(frame, text='Continuar', command=clique)
         botao.pack(padx=10, pady=10)
         
 
