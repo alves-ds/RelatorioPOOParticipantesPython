@@ -114,13 +114,12 @@ class ProcessaAcelerometro():
         frame = customtkinter.CTkFrame(master=janela_input, width=350, height=400)
         frame.pack(side=Tkinter.RIGHT)
 
+        from PIL import Image
 
 
-        # Parei aqui, precisamos dar um jeito de fazer a imagem aparecer
-        img = Tkinter.PhotoImage(file="img_relatorio.png")
-        label_img = customtkinter.CTkLabel(master=janela_input, image=img)
-        label_img.place(x=5, y=65)
-        
+        img = customtkinter.CTkImage(Image.open("img_relatorio.png"), size=(320,320))
+        label_img = customtkinter.CTkLabel(master=janela_input, text = "", image=img)
+        label_img.pack(padx=0, pady=40)
 
         texto_id = customtkinter.CTkLabel(frame, text='Insira o ID do usuário abaixo')
         texto_id.pack(padx=10, pady=10)
