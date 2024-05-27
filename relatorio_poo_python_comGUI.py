@@ -497,28 +497,43 @@ class ProcessaAcelerometro():
     def AgrupardadosSemanaisFleem(self):
         #soma dos dados semanais
         #semana1
+        global soma_leve_sem1
         soma_leve_sem1 = sum(self.leve_sem1min)
+        global soma_mod_sem1
         soma_mod_sem1 = sum(self.moderada_sem1min)
+        global soma_vig_sem1
         soma_vig_sem1 = sum(self.vigorosa_sem1min)
 
         #semana2
+        global soma_leve_sem2
         soma_leve_sem2 = sum(self.leve_sem2min)
+        global soma_mod_sem2
         soma_mod_sem2 = sum(self.moderada_sem2min)
+        global soma_vig_sem2
         soma_vig_sem2 = sum(self.vigorosa_sem2min)
 
         #semana3
+        global soma_leve_sem3
         soma_leve_sem3 = sum(self.leve_sem3min)
+        global soma_mod_sem3
         soma_mod_sem3 = sum(self.moderada_sem3min)
+        global soma_vig_sem3
         soma_vig_sem3 = sum(self.vigorosa_sem3min)
 
         #semana4
+        global soma_leve_sem4
         soma_leve_sem4 = sum(self.leve_sem4min)
+        global soma_mod_sem4
         soma_mod_sem4 = sum(self.moderada_sem4min)
+        global soma_vig_sem4
         soma_vig_sem4 = sum(self.vigorosa_sem4min)
 
         #semana5
+        global soma_leve_sem5
         soma_leve_sem5 = sum(self.leve_sem5min)
+        global soma_mod_sem5
         soma_mod_sem5 = sum(self.moderada_sem5min)
+        global soma_vig_sem5
         soma_vig_sem5 = sum(self.vigorosa_sem5min)
 
         #Dados de atividade fisica leve ao longo das 5 semanas
@@ -587,6 +602,46 @@ class ProcessaAcelerometro():
 
     def ProcessarDadosIpaq(self):
         #Dados da semana1
+        global af_leve_sem1
+        global af_mod_sem1
+        global af_vig_sem1
+        global af_remunerada_1
+        global af_transporte_1
+        global af_domestica_1
+        global af_lazer_1
+
+        global af_leve_sem2
+        global af_mod_sem2
+        global af_vig_sem2
+        global af_remunerada_2
+        global af_transporte_2
+        global af_domestica_2
+        global af_lazer_2
+
+        global af_leve_sem3
+        global af_mod_sem3
+        global af_vig_sem3
+        global af_remunerada_3
+        global af_transporte_3
+        global af_domestica_3
+        global af_lazer_3
+
+        global af_leve_sem4
+        global af_mod_sem4
+        global af_vig_sem4
+        global af_remunerada_4
+        global af_transporte_4
+        global af_domestica_4
+        global af_lazer_4
+
+        global af_leve_sem5
+        global af_mod_sem5
+        global af_vig_sem5
+        global af_remunerada_5
+        global af_transporte_5
+        global af_domestica_5
+        global af_lazer_5
+
         af_leve_sem1 = self.base_ipaq['caminhada1'].iloc[self.id_ipaq_num]
         af_mod_sem1 = self.base_ipaq['moderada1'].iloc[self.id_ipaq_num]
         af_vig_sem1 = self.base_ipaq['vigorosa1'].iloc[self.id_ipaq_num]
@@ -723,6 +778,21 @@ class ProcessaAcelerometro():
             janela_resultados.destroy()
 
             janela_resultados.quit()
+
+        leve_sem1 = customtkinter.CTkLabel(janela_resultados, text='Leve semana 1: ' + str(soma_leve_sem1) + ' minutos')
+        leve_sem1.pack(padx=10, pady=10)
+
+        leve_sem2 = customtkinter.CTkLabel(janela_resultados, text='Leve semana 2: ' + str(soma_leve_sem2) + ' minutos')
+        leve_sem2.pack(padx=10, pady=10)
+
+        leve_sem3 = customtkinter.CTkLabel(janela_resultados, text='Leve semana 3: ' + str(soma_leve_sem3) + ' minutos')
+        leve_sem3.pack(padx=10, pady=10)
+
+        leve_sem4 = customtkinter.CTkLabel(janela_resultados, text='Leve semana 4: ' + str(soma_leve_sem4) + ' minutos')
+        leve_sem4.pack(padx=10, pady=10)
+
+        leve_sem5 = customtkinter.CTkLabel(janela_resultados, text='Leve semana 5: ' + str(soma_leve_sem5) + ' minutos')
+        leve_sem5.pack(padx=10, pady=10)
 
         botao_fechar = customtkinter.CTkButton(janela_resultados, text="Fechar", command=fechar_tela_resultados)
         botao_fechar.pack()
